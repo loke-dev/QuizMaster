@@ -1,0 +1,56 @@
+{
+  "name": "@1dv022/examination-2",
+  "version": "1.0.0",
+  "homepage": "https://coursepress.lnu.se/kurs/klientbaserad-webbprogrammering/",
+  "contributors": [
+    {
+      "name": "Johan Leitet",
+      "email": "johan.leitet@lnu.se"
+    },
+    {
+      "name": "John Häggerud",
+      "email": "john.haggerud@lnu.se"
+    },
+    {
+      "name": "Mats Loock",
+      "email": "mats.loock@lnu.se"
+    },
+    {
+      "name": "Jacob Lindehoff",
+      "email": "jacob.lindehoff@lnu.se"
+    }
+  ],
+  "license": "CC-BY-4.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/1dv022/examination-2"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "^12.0.1",
+    "http-server": "^0.8.5",
+    "npm-run-all": "^1.2.13",
+    "watchify": "^3.6.0"
+  },
+  "bin": {},
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "watch": "npm-run-all --parallel watch:*",
+    "debug": "npm-run-all --parallel server:http watch:*",
+    "build:html": "cp -R ./client/source/*.html ./client/debug/",
+    "build:css": "cp -R ./client/source/css/*.css ./client/debug/stylesheet/",
+    "build:img": "cp -R ./client/source/image/ ./client/debug/",
+    "server:http": "http-server ./client/debug -p 4050",
+
+    "watch:js": "watchify ./client/source/js/app.js -o ./client/debug/javascript/build.js -d -v --poll",
+    "watch:html": "nodemon --watch ./client/source -e html -x \"npm run build:html\" --legacy-watch",
+    "watch:css": "nodemon --watch ./client/source/css -e css -x \"npm run build:css\" --legacy-watch",
+    "watch:img": "nodemon --watch ./client/source/image -e jpg,jpeg,png,webp,gif,svg -x \"npm run build:img\" --legacy-watch"
+
+  }
+}
