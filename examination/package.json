@@ -44,7 +44,7 @@
     "debug": "npm-run-all --parallel server:http watch:*",
     "build:html": "cp -R ./client/source/*.html ./client/debug/",
     "build:css": "cp -R ./client/source/css/*.css ./client/debug/stylesheet/",
-    "build:img": "cp -R ./client/source/image/ ./client/debug/",
+    "build:img": "cp -R ./client/source/image ./client/debug/",
     "server:http": "http-server ./client/debug -p 4000",
 
     "watch:js": "watchify ./client/source/js/app.js -o ./client/debug/javascript/build.js -d -v --poll",
