@@ -45,7 +45,7 @@
     "build:html": "cp -R ./client/source/*.html ./client/debug/",
     "build:css": "cp -R ./client/source/css/*.css ./client/debug/stylesheet/",
     "build:img": "cp -R ./client/source/image/ ./client/debug/",
-    "server:http": "http-server ./client/debug -p 4050",
+    "server:http": "http-server ./client/debug -p 4000",
 
     "watch:js": "watchify ./client/source/js/app.js -o ./client/debug/javascript/build.js -d -v --poll",
     "watch:html": "nodemon --watch ./client/source -e html -x \"npm run build:html\" --legacy-watch",

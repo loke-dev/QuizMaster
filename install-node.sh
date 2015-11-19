@@ -41,12 +41,3 @@ sudo npm install -g watchify
 sudo npm install -g http-server
 sudo npm install -g npm-run-all
 sudo npm install -g nodemon
-
-echo "Installing npm packages for testing"
-sudo npm install -g phantomjs
-sudo npm install -g casperjs
-sudo npm install -g mocha
-sudo npm install -g chai
-sudo npm install -g mocha-casperjs
-sudo npm install -g mocha-phantomjs
-sudo npm install -g casper-chai
