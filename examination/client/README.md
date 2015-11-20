@@ -2,7 +2,7 @@
 ## The quiz application
 
 This examination will focus on asynchronous communication agains an external [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) web services through AJAX.
-The backend (server-side code) of this assignment will be given and the students job is to write the client-side code.
+The backend (server-side code) of this assignment will be given and your job is to write the client-side code.
 
 ## Preperation
 Do the excercises at least the on A and B level.
