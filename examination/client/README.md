@@ -42,13 +42,20 @@ If the user answer all the questions with correct answers. The game should check
 
 ### The questions and answers
 The questions will be public to the client application through a RESTful Web API. The first question (startpoint of the application) is at the URL:
-*LÄNK HÄR*
+```
+http://vhost3.lnu.se:20080/question/1
+```
 You can find the source code of the server at the GitHub repo:
-https://github.com/thajo/AjaxAssignment, that is if you are interested in running the server by you self [optional, but good training].
+```
+https://github.com/thajo/AjaxAssignment
+```
+, that is if you are interested in running the server by you self [optional, but good training].
 
-The response of the API will tell you what kind of question you should show to the user. In other word, you have to analyze the response from the server to know how to display the questions and how to send new requests. Hyperlink is provided by the server response in a RESTful way. The server responses will also give clues about what HTTP-methods to use and how to send the answers back.
+The response of the API will tell you what kind of question you should show to the user and where to send the answers. In other word, you have to analyze the response from the server to know how to display the questions and how to send new requests for answering the questions. Hyperlink is provided by the server response in a RESTful way. The server responses will also give clues about what HTTP-methods to use and how to send the answers back.
 
 The server will put out two different types of questions. Simple text questions and questions with alternatives where the user should answer with the right key "alt1", "alt2" ect. You can watch the server responses and decide what is what.
+
+The last questions answer will not return any new link to a new question and that means that the quiz is over.
 
 ### Finishing up
 Create a release tag at github to indicate that you are ready for examination.
