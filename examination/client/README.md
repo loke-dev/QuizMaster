@@ -66,7 +66,7 @@ Create a release tag at github to indicate that you are ready for examination. B
 * The client application must be written in vanilla javascript, no libraries like JQuery.
 * It should be easy for the user to understand the application and how to use it to take the quizes.
 * The application must be able to handle the different type of questions/answers that the server provide/handle
-* The client application should have a timer that counts down for every question.
+* For ever question there should be a timer counting down from 20s to 0s
 * The client application should also keep track of the total time the user takes to answer all the questions.
 * The user should be able to choose a nickname at the start of the game that will be used in the high-score list.
 * Application should use Web Storage to store a high-score list which presents the 5 fastest total times at the end of the game. At least nickname and total time should be present.
