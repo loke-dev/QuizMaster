@@ -4,6 +4,10 @@
 This examination will focus on asynchronous communication agains an external [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) web services through AJAX.
 The backend (server-side code) of this assignment will be given and your job is to write the client-side code.
 
+## Deadline and submission
+Deadline: 9 / 12 12.00
+Submit: Submit your assignment by doing a release on GitHub named "v1.0". In case of changes after a released version please use incremental version numbers, i.e. "v1.1", "v1.22 etc.
+
 ## Preperation
 Do the excercises at least the on A and B level.
 Read the chapters in the book for this part.
@@ -58,7 +62,7 @@ The server will put out two different types of questions. Simple text questions 
 The last questions answer will not return any new link to a new question and that means that the quiz is over.
 
 ### Finishing up
-Create a release tag at github to indicate that you are ready for examination.
+Create a release tag at github to indicate that you are ready for examination. Book a time for oral exam.
 
 ## Requirements
 * The client application must be written in vanilla javascript, no libraries like JQuery.
