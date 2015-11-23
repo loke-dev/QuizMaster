@@ -24,7 +24,7 @@ Now, do:
 3. `vagrant ssh` to connect to the machine.
 
 ## In the vagrant terminal (after `vagrant ssh`)
-1. Make sure you are located in the folder `/vagrant/exercise/` at all times.
+1. Make sure you are located in the folder `/vagrant/examination/` at all times.
 2. Do `npm run debug`. The following will happen:
   * A process will start watching files in the folder `source/` for changes. When a change is detected the file will be copied to the debug-folder as follows:
     * `source/image/` -> `debug/image` .jpeg, .jpg, .png, .gif, .svg are copied
