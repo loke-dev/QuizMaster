@@ -1,3 +1,10 @@
+After performing this assignment the students will fulfill the three goals described in the course syllabus:
+
+* Describe a web browsers different internal components and their interactions including browser security mechanisms
+* Create web applications were JavaScript, HTML and CSS have clear roles and are clearly separated
+* Store and with asynchronous communication, transfer data with for the task appropriate data format
+
+This examination is worth 3 credit (3hp).
 
 ## The quiz application
 
@@ -21,15 +28,6 @@ git pull https://github.com/1dv022/examination-2.git
 ```
 This repo should include a VagrantFile with the same stuff that you have been used in the exercises.
 Then start writing your code in this repo and do your commits as usually.
-
-## Goal
-After performing this assignment the students will fulfill the three goals described in the course syllabus:
-
-* Describe a web browsers different internal components and their interactions including browser security mechanisms
-* Create web applications were JavaScript, HTML and CSS have clear roles and are clearly separated
-* Store and with asynchronous communication, transfer data with for the task appropriate data format
-
-This examination is worth 3 credit (3hp).
 
 ##Notice
 Any attempt to plagiarism or other way of cheating will be reported to the university discipline board
