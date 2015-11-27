@@ -1,34 +1,32 @@
+/*
+ @author - Loke Carlsson
+ */
+
+var quiz = require("./quiz");
 var ajax = require("./ajax");
-var req = new XMLHttpRequest();
-var template = document.querySelector("#template1");
 var submit = document.querySelector("#submit");
-var node = document.importNode(template.content, true);
-var url = url || "http://vhost3.lnu.se:20080/question/1";
+var urlQ = urlQ || "http://vhost3.lnu.se:20080/question/1";
 
-document.querySelector("#area").appendChild(node);
+for (var i = 1; i <= 2; i += 1) {
+    //quiz.clean();
+    quiz.quiz(i, urlQ);
+}
 
-req.addEventListener("load", function() {
-    var question = JSON.parse(req.responseText).question;
-    var questionNode = document.createTextNode(question);
-    var title = document.createTextNode("Question " + JSON.parse(req.responseText).id);
-    var textClass = document.querySelector(".text");
-
-    document.querySelector("#title").appendChild(title);
-    textClass.appendChild(questionNode);
-});
-
-req.open("GET", url);
-req.send();
+var urlA = "http://vhost3.lnu.se:20080/answer/" + i;
 
 submit.addEventListener("click", function() {
     var answerText = document.querySelector("#inputBox").value;
     var jsonObj = JSON.stringify({
         answer: answerText
     });
-    ajax.request({method: "POST", url: "http://vhost3.lnu.se:20080/answer/1", answer: jsonObj}, function(error, response) {
+    ajax.request({method: "POST", url: urlA, answer: jsonObj}, function(error, response) {
         console.log(error);
         console.log(response);
         console.log(JSON.parse(response).nextURL);
-        url = JSON.parse(response).nextURL;
+        console.log(urlQ);
+        urlQ = JSON.parse(response).nextURL;
     });
+
 });
+
+//http://vhost3.lnu.se:20080/answer/1
