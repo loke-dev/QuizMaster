@@ -27,6 +27,24 @@ function request(config, callback) {
     req.send(config.answer);
 }
 
+function requestGet(url, callback) {
+    var reqGet = new XMLHttpRequest();
+
+    reqGet.addEventListener("load", function() {
+
+        if (reqGet.status > 400) {
+            callback(reqGet.status);
+        }
+
+        callback(null, reqGet.responseText);
+
+    });
+
+    reqGet.open("GET", url);
+    reqGet.send();
+}
+
 module.exports = {
-    request: request
+    request: request,
+    requestGet: requestGet
 };

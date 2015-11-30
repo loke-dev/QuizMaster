@@ -1,24 +1,7 @@
-var quiz = function(quest, url) {
-    var currentQuest = quest || 1;
-    var currentUrl = url;
-    var req = new XMLHttpRequest();
-    var template = document.querySelector("#template" + currentQuest);
+var template = function(quest) {
+    var template = document.querySelector("#template" + quest);
     var node = document.importNode(template.content, true);
     document.querySelector(".area").appendChild(node);
-
-    req.addEventListener("load", function() {
-        var question = JSON.parse(req.responseText).question;
-        var questionNode = document.createTextNode(question);
-        var title = document.createTextNode("Question " + JSON.parse(req.responseText).id);
-        var textClass = document.querySelector(".text");
-
-        document.querySelector("#title").appendChild(title);
-        textClass.appendChild(questionNode);
-    });
-
-    req.open("GET", currentUrl);
-    req.send();
-
 };
 
 var clean = function() {
@@ -28,7 +11,35 @@ var clean = function() {
     }
 };
 
+var switchCase = function(i) {
+    switch (i) {
+        case 1:
+            console.log("template 1");
+            template(1);
+            break;
+        case 2:
+            console.log("template 2");
+            template(2);
+            break;
+        case 3:
+            console.log("template 3");
+            template(3);
+            break;
+        case 4:
+            console.log("template 4");
+            template(4);
+            break;
+        case 5:
+            console.log("template 5");
+            template(5);
+            break;
+        default:
+            console.log("default!!!");
+    }
+};
+
 module.exports = {
-    quiz:quiz,
-    clean:clean
+    template:template,
+    clean:clean,
+    switchCase:switchCase
 };
