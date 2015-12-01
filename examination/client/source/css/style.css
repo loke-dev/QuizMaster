@@ -8,6 +8,22 @@
     margin-top: 20px;
 }
 
+#startQuiz {
+    background-color: #97ff44;
+    color: black;
+    border-color: #52952a;
+    padding: 10px 20px 10px 20px;
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
 .text {
     margin-top: 10px;
     margin-bottom: 10px;

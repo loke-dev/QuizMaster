@@ -14,7 +14,7 @@ function request(config, callback) {
 
     req.addEventListener("load", function() {
 
-        if (req.status > 400) {
+        if (req.status >= 400) {
             callback(req.status);
         }
 

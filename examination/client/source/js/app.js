@@ -5,6 +5,7 @@
 var quiz = require("./quiz");
 var ajax = require("./ajax");
 var submit = document.querySelector("#submit");
+var startQuiz = document.querySelector("#startQuiz");
 var urlQ = urlQ || "http://vhost3.lnu.se:20080/question/1";
 var urlA;
 var requestId;
@@ -14,20 +15,23 @@ var getReq = function() {
     ajax.requestGet(urlQ, function(error, response) {
         requestId = JSON.parse(response).id;
         urlA = JSON.parse(response).nextURL;
-        var question = JSON.parse(response).question;
-        var questionNode = document.createTextNode(question);
-        var textClass = document.querySelector(".text");
-        textClass.appendChild(questionNode);
+        quiz.createTemplate(i, JSON.parse(response).question, JSON.parse(response).alternatives);
     });
 };
 
-quiz.switchCase(1);
-getReq();
+startQuiz.addEventListener("click", function() {
+    startQuiz.classList.add("hidden");
+    startQuiz.classList.remove("visible");
+    submit.classList.add("visible");
+    submit.classList.remove("hidden");
+    quiz.clean();
+    quiz.switchCase(1);
+    getReq();
+});
 
 submit.addEventListener("click", function() {
-    var answerText = document.querySelector("#inputBox").value;
     var jsonObj = JSON.stringify({
-        answer: answerText
+        answer: quiz.answer(i)
     });
 
     ajax.request({method: "POST", url: urlA, answer: jsonObj}, function(error, response) {
@@ -38,10 +42,14 @@ submit.addEventListener("click", function() {
             i += 1;
             quiz.switchCase(i);
             getReq();
+        } else if (error >= 400) {
+            startQuiz.classList.remove("hidden");
+            startQuiz.classList.add("visible");
+            submit.classList.remove("visible");
+            submit.classList.add("hidden");
+            quiz.clean();
         }
 
     });
 
 });
-
-//http://vhost3.lnu.se:20080/answer/1

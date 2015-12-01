@@ -33,13 +33,52 @@ var switchCase = function(i) {
             console.log("template 5");
             template(5);
             break;
-        default:
-            console.log("default!!!");
+        case 6:
+            console.log("template 6");
+            template(6);
+            break;
+        case 7:
+            console.log("template 7");
+            template(7);
+            break;
     }
+};
+
+var answer = function() {
+
+    var answerText;
+
+    var radios = document.getElementsByName("radio");
+    var value;
+    for (var j = 0; j < radios.length; j += 1) {
+        if (radios[j].checked) {
+            value = radios[j].value;
+        }
+    }
+
+    if (document.querySelector(".inputBox")) {
+        answerText = document.querySelector(".inputBox").value;
+    } else {
+        answerText = value;
+    }
+
+    return answerText;
+
+};
+
+var createTemplate = function(i, question, alternatives) {
+    var titleNr = document.createTextNode(i);
+    var questionNode = document.createTextNode(question);
+    var textClass = document.querySelector(".text");
+    textClass.appendChild(questionNode);
+    document.querySelector(".title").appendChild(titleNr);
+
 };
 
 module.exports = {
     template:template,
     clean:clean,
-    switchCase:switchCase
+    switchCase:switchCase,
+    answer:answer,
+    createTemplate:createTemplate
 };
