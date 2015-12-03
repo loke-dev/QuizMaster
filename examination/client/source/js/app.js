@@ -13,9 +13,13 @@ var i = 1;
 
 var getReq = function() {
     ajax.requestGet(urlQ, function(error, response) {
+        var alts = JSON.parse(response).alternatives;
+        var quests = JSON.parse(response).question;
         requestId = JSON.parse(response).id;
         urlA = JSON.parse(response).nextURL;
-        quiz.createTemplate(i, JSON.parse(response).question, JSON.parse(response).alternatives);
+        console.log(quests);
+        console.log(alts);
+        quiz.createTemplate(i, quests, alts);
     });
 };
 
@@ -25,7 +29,7 @@ startQuiz.addEventListener("click", function() {
     submit.classList.add("visible");
     submit.classList.remove("hidden");
     quiz.clean();
-    quiz.switchCase(1);
+    //quiz.switchCase(1);
     getReq();
 });
 
@@ -40,7 +44,7 @@ submit.addEventListener("click", function() {
         if (error === null) {
             quiz.clean();
             i += 1;
-            quiz.switchCase(i);
+            //quiz.switchCase(i);
             getReq();
         } else if (error >= 400) {
             startQuiz.classList.remove("hidden");
