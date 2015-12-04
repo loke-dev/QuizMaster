@@ -4,6 +4,12 @@ var template = function(quest) {
     document.querySelector(".area").appendChild(node);
 };
 
+var start = function() {
+    var template = document.querySelector("#startTemplate");
+    var node = document.importNode(template.content, true);
+    document.querySelector(".area").appendChild(node);
+};
+
 var clean = function() {
     var el = document.querySelector(".area");
     while (el.hasChildNodes()) {
@@ -11,37 +17,10 @@ var clean = function() {
     }
 };
 
-var switchCase = function(i) {
-    switch (i) {
-        case 1:
-            console.log("template 1");
-            template(1);
-            break;
-        case 2:
-            console.log("template 2");
-            template(2);
-            break;
-        case 3:
-            console.log("template 3");
-            template(3);
-            break;
-        case 4:
-            console.log("template 4");
-            template(4);
-            break;
-        case 5:
-            console.log("template 5");
-            template(5);
-            break;
-        case 6:
-            console.log("template 6");
-            template(6);
-            break;
-        case 7:
-            console.log("template 7");
-            template(7);
-            break;
-    }
+var gameOver = function() {
+    var template = document.querySelector("#endTemplate");
+    var node = document.importNode(template.content, true);
+    document.querySelector(".area").appendChild(node);
 };
 
 var answer = function() {
@@ -77,10 +56,8 @@ var createTemplate = function(i, question, alternatives) {
     document.querySelector(".title").appendChild(titleNr);
 
     if (alternatives) {
-
         var alts = Object.getOwnPropertyNames(alternatives);
         var numAlt = Object.getOwnPropertyNames(alternatives).length;
-
         var frag = document.createDocumentFragment();
         for (var j = 0; j < numAlt; j += 1) {
             var radio = document.createElement("input");
@@ -111,8 +88,9 @@ var createTemplate = function(i, question, alternatives) {
 
 module.exports = {
     template:template,
+    start:start,
     clean:clean,
-    switchCase:switchCase,
+    gameOver:gameOver,
     answer:answer,
     createTemplate:createTemplate
 };

@@ -16,9 +16,9 @@ function request(config, callback) {
 
         if (req.status >= 400) {
             callback(req.status);
+        } else {
+            callback(null, req.responseText);
         }
-
-        callback(null, req.responseText);
 
     });
 
@@ -32,7 +32,7 @@ function requestGet(url, callback) {
 
     reqGet.addEventListener("load", function() {
 
-        if (reqGet.status > 400) {
+        if (reqGet.status >= 400) {
             callback(reqGet.status);
         }
 

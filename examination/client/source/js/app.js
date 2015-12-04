@@ -6,21 +6,23 @@ var quiz = require("./quiz");
 var ajax = require("./ajax");
 var submit = document.querySelector("#submit");
 var startQuiz = document.querySelector("#startQuiz");
-var urlQ = urlQ || "http://vhost3.lnu.se:20080/question/1";
+var urlQ = urlQ || "http://oskaremilsson.se:4000/question/1";
 var urlA;
 var requestId;
 var i = 1;
 
+quiz.start();
+
 var getReq = function() {
-    ajax.requestGet(urlQ, function(error, response) {
+    if (urlQ) {
+        ajax.requestGet(urlQ, function(error, response) {
         var alts = JSON.parse(response).alternatives;
         var quests = JSON.parse(response).question;
         requestId = JSON.parse(response).id;
         urlA = JSON.parse(response).nextURL;
-        console.log(quests);
-        console.log(alts);
         quiz.createTemplate(i, quests, alts);
     });
+    }
 };
 
 startQuiz.addEventListener("click", function() {
@@ -29,7 +31,6 @@ startQuiz.addEventListener("click", function() {
     submit.classList.add("visible");
     submit.classList.remove("hidden");
     quiz.clean();
-    //quiz.switchCase(1);
     getReq();
 });
 
@@ -39,21 +40,21 @@ submit.addEventListener("click", function() {
     });
 
     ajax.request({method: "POST", url: urlA, answer: jsonObj}, function(error, response) {
-        console.log("next url: " + JSON.parse(response).nextURL);
-        urlQ = JSON.parse(response).nextURL;
-        if (error === null) {
-            quiz.clean();
+        quiz.clean();
+        if (error === null || error < 400) {
             i += 1;
-            //quiz.switchCase(i);
+            urlQ = JSON.parse(response).nextURL;
             getReq();
         } else if (error >= 400) {
             startQuiz.classList.remove("hidden");
             startQuiz.classList.add("visible");
             submit.classList.remove("visible");
             submit.classList.add("hidden");
-            quiz.clean();
+            urlQ = "http://oskaremilsson.se:4000/question/1";
+            urlA = "";
+            quiz.gameOver();
         }
-
     });
 
 });
+
