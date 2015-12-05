@@ -1,3 +1,5 @@
+"use strict";
+
 var template = function(quest) {
     var template = document.querySelector("#template" + quest);
     var node = document.importNode(template.content, true);

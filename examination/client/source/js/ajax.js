@@ -1,3 +1,4 @@
+"use strict";
 /**
  * This callback function sends request to the database
  * @param config
