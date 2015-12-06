@@ -67,6 +67,7 @@ var genInput = function() {
     inputBox.placeholder = "Your answer here..";
     inputBox.classList.add("inputBox");
     document.querySelector(".inputDiv").appendChild(inputBox);
+    inputBox.focus();
 };
 
 var createTemplate = function(i, question, alternatives) {

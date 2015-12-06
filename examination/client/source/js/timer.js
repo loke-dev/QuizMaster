@@ -17,7 +17,7 @@ function start(callback) {
     var div = document.querySelector("#timer");
     t = setInterval(function() {
         seconds -= 0.1;
-        div.textContent = seconds.toFixed(1);
+        div.textContent = seconds.toFixed(0);
         if (seconds <= 0) {
             callback();
         }
@@ -39,12 +39,20 @@ function stop() {
     seconds = defaultTime;
 }
 
+function clean() {
+    startTime = 0;
+    endTime = 0;
+    totalTime = 0;
+    savedTime = 0;
+}
+
 function display() {
-    var text = document.createTextNode(totalTime.toFixed(3));
-    document.querySelector(".highScore").appendChild(text);
+    return totalTime.toFixed(3);
 }
 
 module.exports = {
     start: start,
-    stop: stop
+    stop: stop,
+    display: display,
+    clean: clean
 };

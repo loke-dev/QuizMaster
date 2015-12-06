@@ -6,10 +6,16 @@
 var quiz = require("./quiz");
 var ajax = require("./ajax");
 var timer = require("./timer");
+var highscore = require("./highscore");
 var submit = document.querySelector("#submit");
 var startQuiz = document.querySelector("#startQuiz");
 var timerDiv = document.querySelector("#timer");
-var defaultURL = "http://oskaremilsson.se:4004/question/1";
+var player = document.querySelector(".nameBox");
+var nameBox = document.querySelector(".nameBox");
+
+//http://vhost3.lnu.se:20080/question/1
+//"http://oskaremilsson.se:4004/question/1"
+var defaultURL = "http://vhost3.lnu.se:20080/question/1";
 var urlQ = urlQ || defaultURL;
 var urlA;
 var requestId;
@@ -31,7 +37,11 @@ var gameOver = function() {
     cleanUp();
     quiz.clean();
     timer.stop();
+    timer.clean();
     quiz.gameOver();
+};
+
+var getPlayerName = function() {
 };
 
 //GET request to the server
@@ -49,15 +59,26 @@ var getReq = function() {
 
 //Starts the quiz
 startQuiz.addEventListener("click", function() {
-    quiz.clean();
-    cleanUp();
-    getReq();
-    timerDiv.classList.remove("hidden");
-    timer.stop();
-    timer.start(function() {
+    if (document.querySelector(".nameBox").value) {
+        highscore.getLocal(player);
+        quiz.clean();
+        cleanUp();
+        getReq();
+        timerDiv.classList.remove("hidden");
+        timer.stop();
+        timer.start(function() {
         //Callback function when time runs out
         gameOver();
     });
+    } else {
+        nameBox.classList.remove("green");
+        nameBox.classList.add("red");
+    }
+});
+
+nameBox.addEventListener("keyup", function() {
+    nameBox.classList.remove("red");
+    nameBox.classList.add("green");
 });
 
 //Posts the answer to the server
@@ -81,6 +102,7 @@ submit.addEventListener("click", function() {
             });
         } else {
             gameOver();
+            highscore.display();
         }
     });
 

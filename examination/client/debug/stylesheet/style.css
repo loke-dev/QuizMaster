@@ -1,6 +1,8 @@
 * {
     background-color: #3a3a3a;
     color: #FFFFFF;
+    font-family: 'Coming Soon', cursive;
+    font-size: 20px;
 }
 
 body {
@@ -17,6 +19,7 @@ header {
     width: 50%;
     min-width: 250px;
     margin: auto;
+    margin-bottom: 50px;
 }
 
 #submit {
@@ -25,6 +28,9 @@ header {
     margin-top: 20px;
     position: relative;
     text-align: center;
+    color: #BADA55;
+    border-color: #BADA55;
+
 }
 
 #startQuiz {
@@ -56,3 +62,24 @@ header {
     color: #FFF;
 }
 
+#timer {
+    font-size: 50px;
+}
+
+.inputDiv input {
+    padding: 5px;
+}
+
+.userName input {
+    padding: 5px;
+}
+
+.red {
+    border-color: red;
+    color: red;
+}
+
+.green {
+    border-color: #BADA55;
+    color: #BADA55;
+}
