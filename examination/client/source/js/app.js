@@ -15,17 +15,18 @@ var urlA;
 var requestId;
 var i = 1;
 
+//Clean up some things for a new game
 var cleanUp = function() {
     startQuiz.classList.toggle("hidden");
     startQuiz.classList.toggle("visible");
     submit.classList.toggle("visible");
     submit.classList.toggle("hidden");
-    timerDiv.classList.toggle("visible");
-    timerDiv.classList.toggle("hidden");
+    timerDiv.classList.add("hidden");
     urlQ = defaultURL;
     urlA = "";
 };
 
+//Calls some functions when game is over
 var gameOver = function() {
     cleanUp();
     quiz.clean();
@@ -33,6 +34,7 @@ var gameOver = function() {
     quiz.gameOver();
 };
 
+//GET request to the server
 var getReq = function() {
     if (urlQ) {
         ajax.requestGet(urlQ, function(error, response) {
@@ -45,10 +47,12 @@ var getReq = function() {
     }
 };
 
+//Starts the quiz
 startQuiz.addEventListener("click", function() {
     quiz.clean();
     cleanUp();
     getReq();
+    timerDiv.classList.remove("hidden");
     timer.stop();
     timer.start(function() {
         //Callback function when time runs out
@@ -64,13 +68,18 @@ submit.addEventListener("click", function() {
 
     ajax.request({method: "POST", url: urlA, answer: jsonObj}, function(error, response) {
         quiz.clean();
-        if (error === null || error < 400) {
+
+        if ((error === null || error < 400) && JSON.parse(response).nextURL) {
             urlQ = JSON.parse(response).nextURL;
             i += 1;
             getReq();
+            timerDiv.classList.remove("hidden");
             timer.stop();
-            timer.start();
-        } else if (error >= 400) {
+            timer.start(function() {
+                //Callback function when time runs out
+                gameOver();
+            });
+        } else {
             gameOver();
         }
     });

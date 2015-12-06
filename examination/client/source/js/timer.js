@@ -1,27 +1,17 @@
 "use strict";
 
-//var Timer = function() {
-//    this.seconds = 0;
-//    this.div = document.querySelector("#timer");
-//    this.intervalID = undefined;
-//};
-//
-//Timer.prototype.Start = function() {
-//    var _this = this;
-//    _this.intervalID = setInterval(function() {
-//        _this.seconds += 0.1;
-//        _this.div.textContent = _this.seconds.toFixed(1);
-//    }, 100);
-//};
-//
-//Timer.prototype.Stop = function() {
-//    window.clearInterval(this.intervalID);
-//};
-//
-//module.exports = Timer;
-
 var t;
-var seconds = 20;
+var defaultTime = 20;
+var seconds = defaultTime;
+var startTime = 0;
+var endTime = 0;
+var totalTime = 0;
+var savedTime = 0;
+
+function getDate() {
+    var d = new Date();
+    return d.getTime();
+}
 
 function start(callback) {
     var div = document.querySelector("#timer");
@@ -33,11 +23,25 @@ function start(callback) {
         }
     }, 100);
 
+    startTime = getDate();
 }
 
 function stop() {
+    endTime = getDate();
+    savedTime = (endTime - startTime) / 1000;
+    if (savedTime <= defaultTime) {
+        totalTime += savedTime;
+        console.log("saved " + savedTime);
+        console.log("total " + totalTime);
+    }
+
     clearInterval(t);
-    seconds = 20;
+    seconds = defaultTime;
+}
+
+function display() {
+    var text = document.createTextNode(totalTime.toFixed(3));
+    document.querySelector(".highScore").appendChild(text);
 }
 
 module.exports = {

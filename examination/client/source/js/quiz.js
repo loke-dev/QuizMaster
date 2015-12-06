@@ -39,6 +39,36 @@ var answer = function() {
 
 };
 
+var genRadio = function(alternatives) {
+    var alts = Object.getOwnPropertyNames(alternatives);
+    var numAlt = Object.getOwnPropertyNames(alternatives).length;
+    var frag = document.createDocumentFragment();
+    for (var j = 0; j < numAlt; j += 1) {
+        var radio = document.createElement("input");
+        var altText = alts[j];
+        var alt = alternatives[altText];
+        var text = document.createTextNode(alt);
+        radio.title = (j + 1);
+        radio.type = "radio";
+        radio.name = "radio";
+        radio.value = alts[j];
+        frag.appendChild(radio);
+        frag.appendChild(text);
+        frag.appendChild(document.createElement("br"));
+        radio.classList.add("radio");
+    }
+
+    return frag;
+};
+
+var genInput = function() {
+    var inputBox = document.createElement("input");
+    inputBox.type = "text";
+    inputBox.placeholder = "Your answer here..";
+    inputBox.classList.add("inputBox");
+    document.querySelector(".inputDiv").appendChild(inputBox);
+};
+
 var createTemplate = function(i, question, alternatives) {
     var template = document.querySelector("#template");
     var node = document.importNode(template.content, true);
@@ -52,32 +82,9 @@ var createTemplate = function(i, question, alternatives) {
     document.querySelector(".title").appendChild(titleNr);
 
     if (alternatives) {
-        var alts = Object.getOwnPropertyNames(alternatives);
-        var numAlt = Object.getOwnPropertyNames(alternatives).length;
-        var frag = document.createDocumentFragment();
-        for (var j = 0; j < numAlt; j += 1) {
-            var radio = document.createElement("input");
-            var altText = alts[j];
-            var alt = alternatives[altText];
-            var text = document.createTextNode(alt);
-            radio.title = (j + 1);
-            radio.type = "radio";
-            radio.name = "radio";
-            radio.value = alts[j];
-            frag.appendChild(radio);
-            frag.appendChild(text);
-            frag.appendChild(document.createElement("br"));
-            radio.classList.add("radio");
-        }
-
-        document.querySelector(".radioDiv").appendChild(frag);
-
+        document.querySelector(".radioDiv").appendChild(genRadio(alternatives));
     } else {
-        var inputBox = document.createElement("input");
-        inputBox.type = "text";
-        inputBox.placeholder = "Your answer here..";
-        inputBox.classList.add("inputBox");
-        document.querySelector(".inputDiv").appendChild(inputBox);
+        genInput();
     }
 
 };

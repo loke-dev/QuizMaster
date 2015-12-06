@@ -3,17 +3,39 @@
     color: #FFFFFF;
 }
 
+body {
+    text-align: center;
+}
+
+
+header {
+    background-image: url("../image/quiz.png");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+    height: 150px;
+    width: 50%;
+    min-width: 250px;
+    margin: auto;
+}
+
 #submit {
+    margin: 0 auto;
     padding: 10px 20px 10px 20px;
     margin-top: 20px;
+    position: relative;
+    text-align: center;
 }
 
 #startQuiz {
+    margin: 0 auto;
     background-color: #BADA55;
     color: black;
     border-color: #BADA55;
     padding: 10px 20px 10px 20px;
     margin-top: 20px;
+    text-align: center;
+
 }
 
 .hidden {
