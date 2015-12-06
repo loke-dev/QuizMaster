@@ -15,8 +15,6 @@ var urlA;
 var requestId;
 var i = 1;
 
-quiz.start();
-
 var cleanUp = function() {
     startQuiz.classList.toggle("hidden");
     startQuiz.classList.toggle("visible");
@@ -58,6 +56,7 @@ startQuiz.addEventListener("click", function() {
     });
 });
 
+//Posts the answer to the server
 submit.addEventListener("click", function() {
     var jsonObj = JSON.stringify({
         answer: quiz.answer(i)

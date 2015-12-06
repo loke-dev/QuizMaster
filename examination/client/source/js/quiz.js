@@ -6,12 +6,6 @@ var template = function(quest) {
     document.querySelector(".area").appendChild(node);
 };
 
-var start = function() {
-    var template = document.querySelector("#startTemplate");
-    var node = document.importNode(template.content, true);
-    document.querySelector(".area").appendChild(node);
-};
-
 var clean = function() {
     var el = document.querySelector(".area");
     while (el.hasChildNodes()) {
@@ -90,7 +84,6 @@ var createTemplate = function(i, question, alternatives) {
 
 module.exports = {
     template:template,
-    start:start,
     clean:clean,
     gameOver:gameOver,
     answer:answer,
