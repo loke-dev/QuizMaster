@@ -10,12 +10,11 @@ var highscore = require("./highscore");
 var submit = document.querySelector("#submit");
 var startQuiz = document.querySelector("#startQuiz");
 var timerDiv = document.querySelector("#timer");
-var player = document.querySelector(".nameBox");
 var nameBox = document.querySelector(".nameBox");
 
 //http://vhost3.lnu.se:20080/question/1
 //"http://oskaremilsson.se:4004/question/1"
-var defaultURL = "http://vhost3.lnu.se:20080/question/1";
+var defaultURL = "http://oskaremilsson.se:4004/question/1";
 var urlQ = urlQ || defaultURL;
 var urlA;
 var requestId;
@@ -37,11 +36,11 @@ var gameOver = function() {
     cleanUp();
     quiz.clean();
     timer.stop();
+    highscore.getLocal(nameBox.value);
+    highscore.display(nameBox.value);
+    highscore.saveToLocal(nameBox.value);
     timer.clean();
     quiz.gameOver();
-};
-
-var getPlayerName = function() {
 };
 
 //GET request to the server
@@ -60,7 +59,6 @@ var getReq = function() {
 //Starts the quiz
 startQuiz.addEventListener("click", function() {
     if (document.querySelector(".nameBox").value) {
-        highscore.getLocal(player);
         quiz.clean();
         cleanUp();
         getReq();
@@ -102,7 +100,6 @@ submit.addEventListener("click", function() {
             });
         } else {
             gameOver();
-            highscore.display();
         }
     });
 
