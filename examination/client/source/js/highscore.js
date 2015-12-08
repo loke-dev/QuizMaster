@@ -4,19 +4,17 @@ var timer = require("./timer");
 var objToSave = [];
 var objFetched = [];
 
-var tempTime = 3.53;
+function display() {
+    var frag = document.createDocumentFragment();
 
-function display(player) {
-}
+    for (var i = 0; i < objToSave.length; i += 1) {
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode((i + 1) + ". Player: " + objToSave[i].name + " - Time: " + objToSave[i].time));
+        frag.appendChild(li);
+    }
 
-function getLocal(player) {
-    //localStorage.setItem(player, objParsed);
-}
+    document.querySelector(".highScore").appendChild(frag);
 
-function sort(obj) {
-    obj.sort(function(a, b) {
-        return parseFloat(a.time) - parseFloat(b.time);
-    });
 }
 
 function saveToLocal(player) {
@@ -28,16 +26,16 @@ function saveToLocal(player) {
 
     objFetched = JSON.parse(highScore);
 
-    if (highScore) {
-        if (objFetched.length < 5 && objFetched.length > 0) {
+    if (objFetched) {
+        if (objFetched.length < 5) {
             objToSave = objFetched;
             objToSave.push(objToPush);
             objToSave.sort(function(a, b) {
                 return parseFloat(a.time) - parseFloat(b.time);
             });
-            console.log(objFetched.length);
-        } else if (highScore.length >= 5) {
-            if (timer.display() > objFetched[4]) {
+
+        } else if (objFetched.length >= 5) {
+            if (timer.display() < objFetched[4]) {
                 objFetched.pop();
                 objToSave = objFetched;
                 objToSave.push(objToPush);
@@ -45,8 +43,7 @@ function saveToLocal(player) {
                     return parseFloat(a.time) - parseFloat(b.time);
                 });
             } else {
-                sort(objToSave);
-                console.log(objFetched.length);
+                return;
             }
         }
     } else {
@@ -59,10 +56,5 @@ function saveToLocal(player) {
 
 module.exports = {
     display: display,
-    getLocal: getLocal,
     saveToLocal: saveToLocal
 };
-
-//localStorage.setItem('myObject', JSON.stringify(myObject));
-//
-//myObject = JSON.parse(localStorage.getItem('myObject'));

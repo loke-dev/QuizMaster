@@ -5,6 +5,15 @@
     font-size: 20px;
 }
 
+h1 {
+    font-size: 28px;
+}
+
+.highScore {
+    text-align: center;
+    list-style-type: none;
+}
+
 body {
     text-align: center;
 }
@@ -16,7 +25,6 @@ header {
     background-size: auto;
     background-position: center;
     height: 150px;
-    width: 50%;
     min-width: 250px;
     margin: auto;
     margin-bottom: 50px;
@@ -34,6 +42,17 @@ header {
 }
 
 #startQuiz {
+    margin: 0 auto;
+    background-color: #BADA55;
+    color: black;
+    border-color: #BADA55;
+    padding: 10px 20px 10px 20px;
+    margin-top: 20px;
+    text-align: center;
+
+}
+
+#restart {
     margin: 0 auto;
     background-color: #BADA55;
     color: black;

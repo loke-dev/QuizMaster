@@ -31,8 +31,6 @@ function stop() {
     savedTime = (endTime - startTime) / 1000;
     if (savedTime <= defaultTime) {
         totalTime += savedTime;
-        console.log("saved " + savedTime);
-        console.log("total " + totalTime);
     }
 
     clearInterval(t);

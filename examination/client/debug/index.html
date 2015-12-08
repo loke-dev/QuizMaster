@@ -11,11 +11,14 @@
 <div class="timer"><span id="timer"></span></div>
 <div class="area">
     <h1 class="title">Pick your name!</h1>
-    <div class="userName"><input type="text" placeholder="Player name.." class="nameBox" autofocus></div>
+    <div class="userName"><input type="text" placeholder="Player name.." class="nameBox" autofocus maxlength="15"></div>
 </div>
 <template id="endTemplate">
     <h1 class="title">GAME OVER!</h1>
-    <div class="highScore"></div>
+    <h3>Your answer was wrong!</h3>
+</template>
+<template id="quizComplete">
+    <h1 class="title">You completed the quiz</h1>
 </template>
 <template id="template">
         <h2 class="title">Question </h2>
@@ -24,7 +27,9 @@
         <div class="radioDiv"></div>
 </template>
 
-<button class="visible" id="startQuiz">Start the quiz!</button>
+<ul class="highScore hidden"></ul>
+<button class="hidden" id="restart">Restart</button>
+<button class="visible" id="startQuiz">Start the quiz</button>
 <button class="hidden" id="submit">Submit</button>
 
 <script src="javascript/build.js"></script>

@@ -9,38 +9,58 @@ var timer = require("./timer");
 var highscore = require("./highscore");
 var submit = document.querySelector("#submit");
 var startQuiz = document.querySelector("#startQuiz");
+var list = document.querySelector(".highScore");
+var restart = document.querySelector("#restart");
 var timerDiv = document.querySelector("#timer");
 var nameBox = document.querySelector(".nameBox");
 
 //http://vhost3.lnu.se:20080/question/1
-//"http://oskaremilsson.se:4004/question/1"
-var defaultURL = "http://oskaremilsson.se:4004/question/1";
+//http://oskaremilsson.se:4004/question/1
+var defaultURL = "http://vhost3.lnu.se:20080/question/1";
 var urlQ = urlQ || defaultURL;
 var urlA;
 var requestId;
 var i = 1;
 
-//Clean up some things for a new game
-var cleanUp = function() {
-    startQuiz.classList.toggle("hidden");
-    startQuiz.classList.toggle("visible");
-    submit.classList.toggle("visible");
-    submit.classList.toggle("hidden");
-    timerDiv.classList.add("hidden");
+var resetQuiz = function() {
     urlQ = defaultURL;
     urlA = "";
 };
 
+//Clean up some things for a new game
+var cleanUp = function() {
+    submit.classList.toggle("visible");
+    submit.classList.toggle("hidden");
+    timerDiv.classList.add("hidden");
+    resetQuiz();
+    quiz.clean();
+};
+
 //Calls some functions when game is over
-var gameOver = function() {
-    cleanUp();
+var quizComplete = function() {
+    resetQuiz();
     quiz.clean();
     timer.stop();
-    highscore.getLocal(nameBox.value);
-    highscore.display(nameBox.value);
     highscore.saveToLocal(nameBox.value);
+    highscore.display();
+    timer.clean();
+    quiz.quizComplete();
+    submit.classList.toggle("visible");
+    submit.classList.toggle("hidden");
+    list.classList.toggle("hidden");
+    restart.classList.toggle("hidden");
+    restart.classList.toggle("visible");
+    timerDiv.classList.add("hidden");
+};
+
+var gameFailed = function() {
+    cleanUp();
+    timer.stop();
     timer.clean();
     quiz.gameOver();
+    list.classList.add("hidden");
+    restart.classList.toggle("hidden");
+    restart.classList.toggle("visible");
 };
 
 //GET request to the server
@@ -59,6 +79,8 @@ var getReq = function() {
 //Starts the quiz
 startQuiz.addEventListener("click", function() {
     if (document.querySelector(".nameBox").value) {
+        startQuiz.classList.toggle("hidden");
+        startQuiz.classList.toggle("visible");
         quiz.clean();
         cleanUp();
         getReq();
@@ -66,12 +88,16 @@ startQuiz.addEventListener("click", function() {
         timer.stop();
         timer.start(function() {
         //Callback function when time runs out
-        gameOver();
+        gameFailed();
     });
     } else {
         nameBox.classList.remove("green");
         nameBox.classList.add("red");
     }
+});
+
+restart.addEventListener("click", function() {
+    location.reload();
 });
 
 nameBox.addEventListener("keyup", function() {
@@ -85,23 +111,36 @@ submit.addEventListener("click", function() {
         answer: quiz.answer(i)
     });
 
-    ajax.request({method: "POST", url: urlA, answer: jsonObj}, function(error, response) {
+    if (quiz.answer(i)) {
+        ajax.request({method: "POST", url: urlA, answer: jsonObj}, function(error, response) {
         quiz.clean();
-
-        if ((error === null || error < 400) && JSON.parse(response).nextURL) {
-            urlQ = JSON.parse(response).nextURL;
-            i += 1;
-            getReq();
-            timerDiv.classList.remove("hidden");
-            timer.stop();
-            timer.start(function() {
+        try {
+            if ((error === null || error < 400) && JSON.parse(response).nextURL) {
+                urlQ = JSON.parse(response).nextURL;
+                i += 1;
+                getReq();
+                timerDiv.classList.remove("hidden");
+                timer.stop();
+                timer.start(function() {
                 //Callback function when time runs out
-                gameOver();
+                gameFailed();
             });
-        } else {
-            gameOver();
+            } else if (error >= 400 && JSON.parse(response).nextURL) {
+                gameFailed();
+            } else {
+                quizComplete();
+            }
+        }
+        catch (err) {
+            if (error !== null) {
+                console.log("You answered wrong, try again! " + err);
+                gameFailed();
+            } else {
+                quizComplete();
+            }
         }
     });
+    }
 
 });
 

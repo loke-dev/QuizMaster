@@ -19,6 +19,12 @@ var gameOver = function() {
     document.querySelector(".area").appendChild(node);
 };
 
+var quizComplete = function() {
+    var template = document.querySelector("#quizComplete");
+    var node = document.importNode(template.content, true);
+    document.querySelector(".area").appendChild(node);
+};
+
 var answer = function() {
     var answerText;
     var radios = document.getElementsByName("radio");
@@ -95,5 +101,6 @@ module.exports = {
     clean:clean,
     gameOver:gameOver,
     answer:answer,
-    createTemplate:createTemplate
+    createTemplate:createTemplate,
+    quizComplete:quizComplete
 };
