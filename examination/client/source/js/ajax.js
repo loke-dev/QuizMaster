@@ -1,6 +1,6 @@
 "use strict";
 /**
- * This callback function sends request to the database
+ * Function to post answer to the server with callback function
  * @param config
  * @param callback
  */
@@ -28,6 +28,8 @@ function request(config, callback) {
     req.send(config.answer);
 }
 
+
+//GET request
 function requestGet(url, callback) {
     var reqGet = new XMLHttpRequest();
 

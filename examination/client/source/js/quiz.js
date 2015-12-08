@@ -1,11 +1,6 @@
 "use strict";
 
-var template = function(quest) {
-    var template = document.querySelector("#template" + quest);
-    var node = document.importNode(template.content, true);
-    document.querySelector(".area").appendChild(node);
-};
-
+//Function to clean the area which templates are appended to
 var clean = function() {
     var el = document.querySelector(".area");
     while (el.hasChildNodes()) {
@@ -13,18 +8,21 @@ var clean = function() {
     }
 };
 
+//Template for when the game is over
 var gameOver = function() {
     var template = document.querySelector("#endTemplate");
     var node = document.importNode(template.content, true);
     document.querySelector(".area").appendChild(node);
 };
 
+//Template for when the game is complete
 var quizComplete = function() {
     var template = document.querySelector("#quizComplete");
     var node = document.importNode(template.content, true);
     document.querySelector(".area").appendChild(node);
 };
 
+//Function that handles the extraction of answer from inputbox or radiobuttons
 var answer = function() {
     var answerText;
     var radios = document.getElementsByName("radio");
@@ -45,6 +43,7 @@ var answer = function() {
 
 };
 
+//Function that generates radiobuttons
 var genRadio = function(alternatives) {
     var alts = Object.getOwnPropertyNames(alternatives);
     var numAlt = Object.getOwnPropertyNames(alternatives).length;
@@ -67,6 +66,7 @@ var genRadio = function(alternatives) {
     return frag;
 };
 
+//Function that generates a inputbox
 var genInput = function() {
     var inputBox = document.createElement("input");
     inputBox.type = "text";
@@ -76,6 +76,7 @@ var genInput = function() {
     inputBox.focus();
 };
 
+//Creates a template for each question
 var createTemplate = function(i, question, alternatives) {
     var template = document.querySelector("#template");
     var node = document.importNode(template.content, true);
@@ -97,7 +98,6 @@ var createTemplate = function(i, question, alternatives) {
 };
 
 module.exports = {
-    template:template,
     clean:clean,
     gameOver:gameOver,
     answer:answer,

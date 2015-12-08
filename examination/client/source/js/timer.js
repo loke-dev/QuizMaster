@@ -8,11 +8,13 @@ var endTime = 0;
 var totalTime = 0;
 var savedTime = 0;
 
+//Grabs the current time
 function getDate() {
     var d = new Date();
     return d.getTime();
 }
 
+//Starts the timer with callback function that gets called when the time runs out
 function start(callback) {
     var div = document.querySelector("#timer");
     t = setInterval(function() {
@@ -26,6 +28,7 @@ function start(callback) {
     startTime = getDate();
 }
 
+//Stop the timer
 function stop() {
     endTime = getDate();
     savedTime = (endTime - startTime) / 1000;
@@ -37,6 +40,7 @@ function stop() {
     seconds = defaultTime;
 }
 
+//Clears all the timer variables
 function clean() {
     startTime = 0;
     endTime = 0;
@@ -44,6 +48,7 @@ function clean() {
     savedTime = 0;
 }
 
+//Returns the total time for current game
 function display() {
     return totalTime.toFixed(3);
 }

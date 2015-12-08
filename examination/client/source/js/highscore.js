@@ -4,6 +4,7 @@ var timer = require("./timer");
 var objToSave = [];
 var objFetched = [];
 
+//Prints the highscore on screen in a list
 function display() {
     var frag = document.createDocumentFragment();
 
@@ -17,6 +18,7 @@ function display() {
 
 }
 
+//Handles the fetching, sorting, adding and pushing up to local storage
 function saveToLocal(player) {
     var highScore = localStorage.getItem("highScore");
     var objToPush = {

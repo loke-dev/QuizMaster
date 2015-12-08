@@ -13,15 +13,13 @@ var list = document.querySelector(".highScore");
 var restart = document.querySelector("#restart");
 var timerDiv = document.querySelector("#timer");
 var nameBox = document.querySelector(".nameBox");
-
-//http://vhost3.lnu.se:20080/question/1
-//http://oskaremilsson.se:4004/question/1
 var defaultURL = "http://vhost3.lnu.se:20080/question/1";
 var urlQ = urlQ || defaultURL;
 var urlA;
 var requestId;
 var i = 1;
 
+//Reset all the URL's
 var resetQuiz = function() {
     urlQ = defaultURL;
     urlA = "";
@@ -36,7 +34,7 @@ var cleanUp = function() {
     quiz.clean();
 };
 
-//Calls some functions when game is over
+//Calls several functions when game is over
 var quizComplete = function() {
     resetQuiz();
     quiz.clean();
@@ -53,6 +51,7 @@ var quizComplete = function() {
     timerDiv.classList.add("hidden");
 };
 
+//Calls several functions when the players answer is wrong
 var gameFailed = function() {
     cleanUp();
     timer.stop();
@@ -76,7 +75,7 @@ var getReq = function() {
     }
 };
 
-//Starts the quiz
+//Starts the quiz on button click
 startQuiz.addEventListener("click", function() {
     if (document.querySelector(".nameBox").value) {
         startQuiz.classList.toggle("hidden");
@@ -96,10 +95,12 @@ startQuiz.addEventListener("click", function() {
     }
 });
 
+//reloads the page when restart button is pressed
 restart.addEventListener("click", function() {
     location.reload();
 });
 
+//Check to see if the input box for playername contains letters
 nameBox.addEventListener("keyup", function() {
     nameBox.classList.remove("red");
     nameBox.classList.add("green");
