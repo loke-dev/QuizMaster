@@ -14,31 +14,17 @@ function getLocal(player) {
 }
 
 function sort(obj) {
-    var arr = [];
-    var prop;
-    for (prop in obj) {
-        if (obj.hasOwnProperty(prop)) {
-            arr.push({
-                    key: prop,
-                    value: obj[prop]
-                });
-        }
-    }
-
-    arr.sort(function(a, b) {
-            return a.value - b.value;
-        });
-
-    return arr; // returns array
-
+    obj.sort(function(a, b) {
+        return parseFloat(a.time) - parseFloat(b.time);
+    });
 }
 
 function saveToLocal(player) {
-    var objToPush = {};
     var highScore = localStorage.getItem("highScore");
-
-    objToPush[player] = timer.display();
-    console.log(timer.display());
+    var objToPush = {
+        name: player,
+        time: timer.display()
+    };
 
     objFetched = JSON.parse(highScore);
 
@@ -46,10 +32,18 @@ function saveToLocal(player) {
         if (objFetched.length < 5 && objFetched.length > 0) {
             objToSave = objFetched;
             objToSave.push(objToPush);
+            objToSave.sort(function(a, b) {
+                return parseFloat(a.time) - parseFloat(b.time);
+            });
             console.log(objFetched.length);
         } else if (highScore.length >= 5) {
             if (timer.display() > objFetched[4]) {
-
+                objFetched.pop();
+                objToSave = objFetched;
+                objToSave.push(objToPush);
+                objToSave.sort(function(a, b) {
+                    return parseFloat(a.time) - parseFloat(b.time);
+                });
             } else {
                 sort(objToSave);
                 console.log(objFetched.length);
