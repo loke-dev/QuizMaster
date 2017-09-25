@@ -17,14 +17,14 @@ Make sure you have the following installed on your system:
 
 Now, do:
 
-1. Pull (`git pull https://github.com/1dv022/examination-2.git`) into your existing examination-2 repo. Make sure you are in the root of your repo.
+1. Pull (`git pull https://github.com/LokeCarlsson/QuizMaster.git`) into your existing examination-2 repo. Make sure you are in the root of your repo.
 
 2. Start the virtual machine using `vagrant up` (May take 5-10 minutes this first time. (Ignore red command line statements and warnings.)
 
 3. `vagrant ssh` to connect to the machine.
 
 ## In the vagrant terminal (after `vagrant ssh`)
-1. Make sure you are located in the folder `/vagrant/examination/` at all times.
+1. Make sure you are located in the folder `/vagrant/QuizMaster/` at all times.
 2. Do `npm run debug`. The following will happen:
   * A process will start watching files in the folder `source/` for changes. When a change is detected the file will be copied to the debug-folder as follows:
     * `source/image/` -> `debug/image` .jpeg, .jpg, .png, .gif, .svg are copied
